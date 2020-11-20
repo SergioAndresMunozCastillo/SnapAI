@@ -1,0 +1,22 @@
+Miercoles->
+*Conectar la api a la base de datos
+
+Jueves->
+*Dentro del script principal de la app en node
+	*Eliminar el archivo json una vez se envíe (para que se pueda descargar de nuevo)♣
+*crear las rutas para enviar los archivos JSON ♣
+*Modificar el script de  la cámara para que:
+
+	*Obtenga la fecha actual♣
+	*El timer se actualize cada 10 segundos♣
+	*Se cree el archivo json dentro del timer con los datos datos ♣
+
+*Crear una app de framework7 de manera que se pueda acceder por medio del servidor
+
+Viernes->
+
+*Subir la app de Alan al server
+
+*Crear el login (pantlla y envío y confirmación de datos)
+
+Sábado->
