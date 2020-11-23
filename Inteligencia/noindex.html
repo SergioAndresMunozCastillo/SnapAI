@@ -4,9 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script defer src="face-api.min.js"></script>
-  <script defer src="script.js"></script>
-  <script defer src="FileSaver.min.js"></script>
+  <script>
+      var img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = function() {
+      var canvas = document.createElement('canvas')
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(this, 0,0);
+      console.log(canvas.toDataURL('image/jpeg'))
+      console.log("Anybody home?!")
+      }
+      img.src = './image_to_read/image.jpg';
+  </script>
   <title>Face Recognition</title>
   <style>
     body {

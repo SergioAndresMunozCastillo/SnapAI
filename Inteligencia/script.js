@@ -1,5 +1,24 @@
 const imageUpload = document.getElementById('imageUpload')
 
+var img = new Image();
+var imageEncoded;
+img.crossOrigin = 'Anonymous';
+var myjson;
+var today = new Date();
+var dd = String(today.getDate() - 1).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+var hh = String(today.getUTCHours() + 17).padStart(2, '0');
+if (hh >= 24){
+	hh = 0 + (24 - hh)
+}
+var min = String(today.getMinutes()).padStart(2, '0');
+var sec = String(today.getSeconds()).padStart(2, '0');
+today = yyyy + '/' + mm + '/' + dd + ' at ' + hh + ':' + min + ':' + sec;
+//var blob = new Blob([myjson], {type: "application/json"});
+var blob;
+var saveAs = window.saveAs;
+
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -30,7 +49,23 @@ async function start() {
     results.forEach((result, i) => {
       const box = resizedDetections[i].detection.box
       const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
+      console.log(result.toString())
       drawBox.draw(canvas)
+      img.onload = function() {
+        var canvas = document.createElement('canvas')
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(this, 0,0);
+        console.log("Imagen es -> " + canvas.toDataURL('image/jpeg'))
+        imageEncoded = canvas.toDataURL('image/jpeg').toString()
+        myjson = '{' + '"nombre":' + '"' + result.toString() + '"' + " , " + '"fecha":' + '"' + today + '"' + ' , ' + '"image":' + '"' + imageEncoded + '"' + '}';
+        console.log("JSON es -> " + myjson)
+        blob = new Blob([myjson], {type : "application/json"});
+        saveAs(blob, "new_entry.json");
+        }
+        img.src = './image_to_read/image.jpg';
+
     })
   })
 }
@@ -45,7 +80,6 @@ function loadLabeledImages() {
         const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
         descriptions.push(detections.descriptor)
       }
-
       return new faceapi.LabeledFaceDescriptors(label, descriptions)
     })
   )

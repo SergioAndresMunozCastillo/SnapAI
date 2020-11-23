@@ -7,8 +7,13 @@ const {mongourl} = require('./config/keys')
 const Testy = require('./models/testy')
 const SnapModel = require('./models/snap')
 var imageJSON = JSON.parse(fs.readFileSync('C:/Users/sergi/Downloads/my_outfile.json', 'utf8'))
+var imageString = imageJSON['image'].substring(23, imageJSON['image'].length)
 
 try{
+    fs.writeFile('C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/image_to_read/image.jpg', imageString, 'base64', function(err){
+        if (err) throw err
+        console.log('File saved.')
+    })
     fs.unlinkSync('C:/Users/sergi/Downloads/my_outfile.json')
     console.log("File removed, check it out")
 }catch(err){
