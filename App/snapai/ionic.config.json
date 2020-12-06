@@ -1,0 +1,7 @@
+{
+  "name": "snapai",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

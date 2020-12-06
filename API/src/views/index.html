@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>My App</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="css/framework7.bundle.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/estilos-principal.css">
+  </head>
+  <body>
+    
+    <div class="cont">
+        <h1>Notificaciónes</h1>
+    </div>
+    
+    <div class="list medium-inset">
+        <ul>            <!-- Contenedor de cada notificacion -->
+
+
+
+            <li class="know">                               <!-- Inicio -->
+                
+                      <a class="button popup-open" data-popup=".popup-about">
+                        <div class="item-content">                              
+                            <div class="item-inner">
+                                
+                                <div class="item-title">
+                                    <h2>Juanito Perez</h2>
+                                </div>                              <!-- Estructura basica de una notificacion -->
+                                <div class="item-after">
+                                    <h5>0000/00/00 00:00:00</h5>
+                                </div>
+                            </div>
+                        </div>
+                      </a>
+                
+                <div class="popup popup-about">
+                  <div class="block">
+                    <p>Juanito Perez 0000/00/00 00:00:00</p>
+                    <p><a class="link popup-close" href="#">Close popup</a></p>
+                    <img src="" alt="">
+                    <h2>Cambiar su nombre:</h2>
+                    <input type="text" name="" id="" placeholder="Nombre"><br>
+                    <input type="submit" value="Aceptar">
+                  </div>
+            
+            </li>                                     <!-- Fin -->
+
+
+
+
+            <li class="unknow">                               <!-- Inicio -->
+                
+                <a class="button popup-open" data-popup=".popup-desc">
+                  <div class="item-content">                              
+                      <div class="item-inner">
+                          
+                          <div class="item-title">
+                                <h2>desconocido</h2>
+                          </div>                              <!-- Estructura basica de una notificacion -->
+                          <div class="item-after">
+                              <h5>0000/00/00 00:00:00</h5>
+                          </div>
+                      </div>
+                  </div>
+                </a>
+          
+          <div class="popup popup-desc">
+              <div class="block">
+                <p>Desconocido 0000/00/00 00:00:00</p>
+                <p><a class="link popup-close" href="#">Close popup</a></p>
+                <img src="" alt="">
+                <h2>¿Lo conoces? Añade su nombre:</h2>
+                <input type="text" name="" id="" placeholder="Nombre"><br>
+                <input type="submit" value="Aceptar">
+              </div>
+          </div>
+      
+      </li>                                     <!-- Fin -->
+
+
+
+
+        </ul>
+    </div>
+   
+
+
+    
+
+
+   
+    
+
+    <script type="text/javascript" src="js/framework7.bundle.min.js"></script>
+
+    <script>var app = new Framework7();
+
+        var $$ = Dom7;
+        
+        // DOM events for About popup
+        $$('.popup-about').on('popup:open', function (e) {
+          console.log('About popup open');
+        });
+        $$('.popup-about').on('popup:opened', function (e) {
+          console.log('About popup opened');
+        });
+        
+        // Create dynamic Popup
+        var dynamicPopup = app.popup.create({
+          content: '<div class="popup">'+
+                      '<div class="block">'+
+                        '<p>Popup created dynamically.</p>'+
+                        '<p><a href="#" class="link popup-close">Close me</a></p>'+
+                      '</div>'+
+                    '</div>',
+          // Events
+          on: {
+            open: function (popup) {
+              console.log('Popup open');
+            },
+            opened: function (popup) {
+              console.log('Popup opened');
+            },
+          }
+        });
+        // Events also can be assigned on instance later
+        dynamicPopup.on('close', function (popup) {
+          console.log('Popup close');
+        });
+        dynamicPopup.on('closed', function (popup) {
+          console.log('Popup closed');
+        });
+        
+        // Open dynamic popup
+        $$('.dynamic-popup').on('click', function () {
+          dynamicPopup.open();
+        });
+        
+        // Create Popup with swipe to close
+        var swipeToClosePopup = app.popup.create({
+          el: '.popup-swipe-to-close',
+          swipeToClose: true,
+        });
+        
+        // Create Popup with swipe to close handler
+        var swipeToClosePopup = app.popup.create({
+          el: '.popup-swipe-to-close-handler',
+          swipeToClose: true,
+          swipeHandler: '.my-swipe-to-close-handler',
+        });</script>
+  </body>
+</html>

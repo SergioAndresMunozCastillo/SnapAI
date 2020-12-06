@@ -9,10 +9,15 @@
   "author": "SC",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "framework7": "^5.7.14",
     "fs": "0.0.1-security",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.15",
-    "ngrok": "^3.3.0"
+    "morgan": "^1.10.0",
+    "ngrok": "^3.3.0",
+    "pug": "^3.0.0"
   }
 }
