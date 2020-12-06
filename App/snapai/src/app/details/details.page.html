@@ -14,5 +14,5 @@
   <br>
   {{ data._id }}
   <ion-input placeholder="Si no es la persona, agrega" [(ngModel)] = "name"></ion-input>
-  <ion-button (click) = "onFeedback(data.id, name)">Enviar</ion-button>
+  <ion-button (click) = "onFeedback(data.id, name, data.image)">Enviar</ion-button>
 </ion-content>

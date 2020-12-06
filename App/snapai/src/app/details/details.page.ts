@@ -24,11 +24,12 @@ export class DetailsPage implements OnInit {
      this.data = this.navParamService.getNavData()
    }
 
-  onFeedback(id, name){
+  onFeedback(id, name, image){
     console.log(id);
     let postData = {
       id: id,
-      nombre: name
+      nombre: name,
+      image: image
     };
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json")

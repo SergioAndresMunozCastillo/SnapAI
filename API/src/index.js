@@ -3,6 +3,7 @@ const express = require('express');
 const ngrok = require('ngrok');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 const api = express();
 const morgan = require('morgan')
 const fs = require('fs');
@@ -96,13 +97,7 @@ api.post('/checkname', function(req, res){
         res.json('Bienvenidos al himalaya!');
     }
 });
-/*var modelCheck = mongoose.model('snapsmodels', new mongoose.Schema({
-    nombre: String,
-    fecha: String,
-    image: String
-}));
-*/
-//var modelCheck = require('./models/checkModel');
+
 const updateModel = require('./models/updateModel');
 
 var toSend;
@@ -114,10 +109,14 @@ updateModel.find({}, (err, oneModel) => {
         toSend = oneModel;
     }
 });
-api.get('/checkname', function(req, res){
+api.get('/checkname', async function (req, res) {
     
     res.json(toSend);
 });
+
+(async () => {
+    console.log("Async async")
+})
 
 api.post('/update', urlencodedParser,function(req, res){
     if(!req.body) return res.sendStatus(400)
@@ -127,4 +126,18 @@ api.post('/update', urlencodedParser,function(req, res){
         return res.send("Actualizado")
     })
 
+    var imageString = req.body.image.substring(23, req.body.image.length)
+    var dir = `C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/labeled_images/${req.body.nombre}`;
+    if(!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+
+    try{
+        fs.writeFile(`C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/labeled_images/${req.body.nombre}/${req.body.id}.jpg`, imageString, 'base64', function(err){
+            if (err) throw err
+            console.log('File saved.')
+        })
+    }catch(err){
+        console.error(err)
+    }
 });

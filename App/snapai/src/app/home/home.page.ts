@@ -17,11 +17,7 @@ export class HomePage {
     private navParamService: NavparamService) {}
 
   bringName(round){
-    //console.log(round);
-    let d = {
-      'hero' : 'thanos',
-      'villain' : 'kronk'
-    }
+
     //console.log(JSON.stringify(round))
     this.navParamService.setNavData(round);
     this.router.navigate(['details']);
@@ -30,12 +26,12 @@ export class HomePage {
   checkName(){
     
 
-
     this.http.get('http://localhost:8080/checkname').
     subscribe(data => {
       //console.log(data);
       this.snapChunk = data;
     });
+    
     /*
     this.http.post('http://localhost:8080/checkname', {}, {}).then(
       data => {
