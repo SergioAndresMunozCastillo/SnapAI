@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { NavparamService } from '../navparam.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +12,12 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   userChunk: any = []
+  userId: any
   constructor(private http: HttpClient,
-    private toastController: ToastController) { }
+    private toastController: ToastController,
+    private router: Router, 
+    private location: Location,
+    private navParamService: NavparamService) { }
 
   async checkUser(name, pass){
     var toast;
@@ -30,6 +37,9 @@ export class LoginPage implements OnInit {
           duration: 2000
         });
         toast.present();
+        this.userId = this.userChunk[i].id;
+        this.navParamService.setNavData(this.userId);
+        this.router.navigate(['intro']);
         return "";
       }
       }

@@ -19,6 +19,11 @@ today = yyyy + '/' + mm + '/' + dd + ' at ' + hh + ':' + min + ':' + sec;
 var blob;
 var saveAs = window.saveAs;
 
+fetch("new_json_data/new_data.json").then(response =>{
+  response.json().then(data =>{
+    console.log(data)
+  })
+})
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('/models'),

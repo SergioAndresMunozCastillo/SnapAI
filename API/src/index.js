@@ -99,7 +99,7 @@ userModel.find({}, (err, oneModel) => {
     if(err){
         console.log(err);
     } else{
-        console.log(oneModel);
+        //console.log(oneModel);
         toSendUser = oneModel;
     }
 });
@@ -108,11 +108,12 @@ updateModel.find({}, (err, oneModel) => {
     if(err){
         console.log(err);
     } else{
-        console.log(oneModel);
+        //console.log(oneModel);
         toSendUpdate = oneModel;
     }
 });
 api.get('/checkname', async function (req, res) {
+    
     res.json(toSendUpdate);
 });
 
@@ -163,11 +164,46 @@ api.post('/update', urlencodedParser,function(req, res){
     }
 
     try{
+        //Create the image to the folder
         fs.writeFile(`C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/labeled_images/${req.body.nombre}/${req.body.id}.jpg`, imageString, 'base64', function(err){
             if (err) throw err
             console.log('File saved.')
         })
+
+        //Get the directory list
+        const {readdirSync} = require('fs')
+        const getDirectories = source =>
+        readdirSync(source, { withFileTypes: true })
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name)
+
+        const copyDirectory = getDirectories("C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/labeled_images");
+        for(var i in copyDirectory) console.log(copyDirectory[i]);
+        //Create the json file to update the name array (àrt of the knowledge base)
+
     }catch(err){
         console.error(err)
     }
 });
+
+//Get the directory list
+const {readdirSync} = require('fs')
+const getDirectories = source =>
+readdirSync(source, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+
+const auxDirectory = getDirectories("C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/labeled_images");
+var copyDirectory = `new_set_names = "[{ 'name': '${auxDirectory[0]}' }`;
+
+for(var i = 1 in auxDirectory){
+    copyDirectory += `, { 'name' : '${auxDirectory[i]}'}`
+}
+copyDirectory += `]"`
+
+console.log(copyDirectory);
+
+fs.writeFile(`C:/Users/sergi/OneDrive/Escritorio/White Box 2/Tec2/Last Chance/Inteligencia Artificial/Proyecto/SnapAI/Inteligencia/new_json_data/new_data.json`, copyDirectory, 'UTF-8', function(err){
+    if (err) throw err
+    console.log('New set of names saved.')
+})
