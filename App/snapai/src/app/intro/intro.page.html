@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>intro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-button (click)="checkName()"> Enter </ion-button>
+  <ion-button href="/aboutus">
+    about us
+  </ion-button>
+  <ion-list *ngFor="let snapRound of snapChunk">
+     <ion-item  (click)="bringName(snapRound)">{{ snapRound.nombre}}  - &nbsp; -  {{ snapRound.fecha }}</ion-item>
+  </ion-list>
+</ion-content>

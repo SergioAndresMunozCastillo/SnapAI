@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const updateSchema = Schema({
     id: String,
+    user_id: String,
     nombre: String,
     fecha: String,
     image: String

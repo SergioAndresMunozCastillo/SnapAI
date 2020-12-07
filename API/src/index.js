@@ -90,30 +90,60 @@ api.get('/save', (req, res) =>{
     })
 })
 
-api.post('/checkname', function(req, res){
-    if(req.body.name.toLowerCase() === 'homer'){
-        res.status(401).send({message: 'No admitido por homero'});
-    } else {
-        res.json('Bienvenidos al himalaya!');
+
+const updateModel = require('./models/updateModel');
+const userModel = require('./models/userModel');
+var toSendUpdate;
+var toSendUser;
+userModel.find({}, (err, oneModel) => {
+    if(err){
+        console.log(err);
+    } else{
+        console.log(oneModel);
+        toSendUser = oneModel;
     }
 });
 
-const updateModel = require('./models/updateModel');
-
-var toSend;
 updateModel.find({}, (err, oneModel) => {
     if(err){
         console.log(err);
     } else{
         console.log(oneModel);
-        toSend = oneModel;
+        toSendUpdate = oneModel;
     }
 });
 api.get('/checkname', async function (req, res) {
-    
-    res.json(toSend);
+    res.json(toSendUpdate);
 });
 
+api.get('/checkusers', async function(req, res){
+    res.json(toSendUser);
+})
+api.post('/createuser', urlencodedParser,async function(req, res){
+    if(!req.body) return res.sendStatus(400)
+    const Item = new userModel(req.body);
+    Item.save().then(data=>{
+        console.log("Registrado " + req.body);
+    }).catch(err=>{
+        throw err;
+    })
+});
+/*
+api.get('/creando', urlencodedParser,async function(req, res){
+    ide = Date.now().toString();
+    let sample  = {
+        id : ide,
+        nombre: "Daigo99",
+        contr: "coco"
+    }
+    const Item = new userModel(sample);
+    Item.save().then(data=>{
+        console.log("Registrado " + req.body);
+    }).catch(err=>{
+        throw err;
+    })
+});
+*/
 (async () => {
     console.log("Async async")
 })

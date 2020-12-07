@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label>Nombre de Usuario</ion-label>
+  <ion-input placeholder="ej. WipperSnapper87" [(ngModel)]="name"></ion-input>
+  <ion-item-divider></ion-item-divider>
+  <ion-label>Contraseña</ion-label>
+  <ion-input type="password" [(ngModel)] = "password1"></ion-input>
+  <ion-label>Confirmar contraseña</ion-label>
+  <ion-input type="password" [(ngModel)] = "password2"></ion-input>
+  <ion-item-divider></ion-item-divider>
+  <ion-button href="/login" (click) ="checkPass(name, password1, password2)">Registrarse</ion-button>
+</ion-content>

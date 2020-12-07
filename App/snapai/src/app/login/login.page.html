@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label>Nombre de Usuario</ion-label>
+  <ion-input placeholder="ej. WipperSnapper87" [(ngModel)]="name"></ion-input>
+  <ion-item-divider></ion-item-divider>
+  <ion-label>Contraseña</ion-label>
+  <ion-input type="password" [(ngModel)] = "password"></ion-input>
+  <ion-item-divider></ion-item-divider>
+  <ion-button (click) ="checkUser(name, password)">Iniciar Sesión</ion-button>
+</ion-content>

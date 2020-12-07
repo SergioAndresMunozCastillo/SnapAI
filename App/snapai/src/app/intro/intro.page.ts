@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NavparamService } from '../navparam.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-intro',
+  templateUrl: './intro.page.html',
+  styleUrls: ['./intro.page.scss'],
 })
-export class HomePage {
-    snapChunk: any = [];
+export class IntroPage implements OnInit {
+  snapChunk: any = [];
   constructor(private http: HttpClient, 
     private router: Router, 
     private location: Location,
@@ -29,7 +29,6 @@ export class HomePage {
     this.http.get('http://localhost:8080/checkname').
     subscribe(data => {
       this.snapChunk = data;
-      console.log(this.snapChunk);
     });
     
     /*
@@ -48,5 +47,8 @@ export class HomePage {
     ).catch(error => {
       console.log(error.error);
     }); */
+  }
+
+  ngOnInit() {
   }
 }

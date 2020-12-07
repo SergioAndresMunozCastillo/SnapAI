@@ -19,12 +19,18 @@
   </div>
 </ion-content>
 -->
-<ion-content padding>
-  <ion-button (click)="checkName()"> Enter </ion-button>
-  <ion-button href="/aboutus">
-    about us
-  </ion-button>
-  <ion-list *ngFor="let snapRound of snapChunk">
-     <ion-item  (click)="bringName(snapRound)">{{ snapRound.nombre}}  - &nbsp; -  {{ snapRound.fecha }}</ion-item>
-  </ion-list>
+<ion-content class="auth-form">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-button href="/register">Registrarse</ion-button>
+        <hr>
+        <span class="divider line one-line">o</span>
+        <hr>
+        <span class="already"> Si ya eres usuario </span>
+        <hr>
+        <ion-button href="/login">Iniciar sesión</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
