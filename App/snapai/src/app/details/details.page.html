@@ -8,11 +8,11 @@
   {{ data.nombre}}
   <br>
   {{data.fecha}}
+  <br>
   <img src="{{ data.image }}">
   <br>
   <hr>
   <br>
-  {{ data._id }}
   <ion-input placeholder="Si no es la persona, agrega" [(ngModel)] = "name"></ion-input>
   <ion-button (click) = "onFeedback(data.id, name, data.image)">Enviar</ion-button>
 </ion-content>

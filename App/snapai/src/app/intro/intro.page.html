@@ -5,10 +5,9 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="checkName()"> Enter </ion-button>
-  <ion-button href="/aboutus">
-    about us
-  </ion-button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <ion-button (click)="checkName()"> Show </ion-button>
   <ion-list *ngFor="let snapRound of chunkCopy">
      <ion-item  (click)="bringName(snapRound)">{{ snapRound.nombre}}  - &nbsp; -  {{ snapRound.fecha }}</ion-item>
   </ion-list>

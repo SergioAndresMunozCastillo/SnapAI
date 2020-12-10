@@ -23,10 +23,10 @@ export class HomePage {
     this.router.navigate(['details']);
   }
 
-  checkName(){
+  doSave(){
     
 
-    this.http.get('http://localhost:8080/checkname').
+    this.http.get('http://localhost:8080/save').
     subscribe(data => {
       this.snapChunk = data;
       console.log(this.snapChunk);

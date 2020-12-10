@@ -1,36 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <div class="bar bar-header bar-royal">
+      <h1 class="title">SnapAI</h1>
+    </div>
   </ion-toolbar>
 </ion-header>
 
- <!-- <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
--->
-<ion-content class="auth-form">
-  <ion-grid>
-    <ion-row>
-      <ion-col align-self-center>
-        <ion-button href="/register">Registrarse</ion-button>
+<ion-content >
+  <div class="oya">
+  <ion-grid style="height: 100%">
+    <br>
+    <br>
+    <ion-row  justify-content-center align-items-center style="height: 100%; flex-direction: column">
+      <ion-col class="col col-33 col-offset-50" >
+        <ion-button href="/register" (click) = "doSave()">Registrarse</ion-button>
         <hr>
-        <span class="divider line one-line">o</span>
         <hr>
-        <span class="already"> Si ya eres usuario </span>
-        <hr>
-        <ion-button href="/login">Iniciar sesión</ion-button>
+        <ion-button href="/login" (click) = "doSave()">Iniciar sesión</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
+  </div>
 </ion-content>

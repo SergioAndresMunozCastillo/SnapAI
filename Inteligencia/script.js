@@ -4,6 +4,7 @@ var img = new Image();
 var imageEncoded;
 img.crossOrigin = 'Anonymous';
 var myjson;
+var id = Date.now();
 var today = new Date();
 var dd = String(today.getDate() - 1).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -18,12 +19,23 @@ today = yyyy + '/' + mm + '/' + dd + ' at ' + hh + ':' + min + ':' + sec;
 //var blob = new Blob([myjson], {type: "application/json"});
 var blob;
 var saveAs = window.saveAs;
-
+var new_setnames = [];
+var labels = ["Alan", "Alejandra", "Sergio"]
 fetch("new_json_data/new_data.json").then(response =>{
+  response.json().then(data =>{
+    console.log(data)
+    new_setnames = data;
+    console.log(new_setnames)
+    labels = new_setnames;
+  })
+})
+
+fetch("new_json_data/id.json").then(response =>{
   response.json().then(data =>{
     console.log(data)
   })
 })
+
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -43,6 +55,7 @@ async function start() {
     if (image) image.remove()
     if (canvas) canvas.remove()
     image = await faceapi.bufferToImage(imageUpload.files[0])
+    console.log(imageUpload.files[0]);
     container.append(image)
     canvas = faceapi.createCanvasFromMedia(image)
     container.append(canvas)
@@ -64,7 +77,7 @@ async function start() {
         ctx.drawImage(this, 0,0);
         console.log("Imagen es -> " + canvas.toDataURL('image/jpeg'))
         imageEncoded = canvas.toDataURL('image/jpeg').toString()
-        myjson = '{' + '"nombre":' + '"' + result.toString() + '"' + " , " + '"fecha":' + '"' + today + '"' + ' , ' + '"image":' + '"' + imageEncoded + '"' + '}';
+        myjson = '{' + '"id" : ' + '"' + id + '"' + " , " + '"user_id": ' + "1607314590478" + ', ' + '"nombre":' + '"' + result.toString() + '"' + " , " + '"fecha":' + '"' + today + '"' + ' , ' + '"image":' + '"' + imageEncoded + '"' + '}';
         console.log("JSON es -> " + myjson)
         blob = new Blob([myjson], {type : "application/json"});
         saveAs(blob, "new_entry.json");
@@ -76,12 +89,13 @@ async function start() {
 }
 
 function loadLabeledImages() {
-  const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye', 'Jim Rhodes', 'Thor', 'Tony Stark','Yo', 'Hector']
+  //labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye', 'Jim Rhodes', 'Thor', 'Tony Stark','Yo', 'Hector']
+ // labels = [];
   return Promise.all(
     labels.map(async label => {
       const descriptions = []
-      for (let i = 1; i <= 2; i++) {
-        const img = await faceapi.fetchImage(`/labeled_images/${label}/${i}.jpg`)
+      for (let i = 1; i <= label.length; i++) {
+        const img = await faceapi.fetchImage(`/labeled_images/${label}/1607314590478.jpg`)
         const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
         descriptions.push(detections.descriptor)
       }
@@ -89,5 +103,6 @@ function loadLabeledImages() {
     })
   )
 }
+
 /* C:/Users/alele/Desktop/Cosas/visual Code/IA/labeled_images/${label}/${i}.jpg 
 https://raw.githubusercontent.com/WebDevSimplified/Face-Recognition-JavaScript/master/labeled_images/${label}/${i}.jpg*/

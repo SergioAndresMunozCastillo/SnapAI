@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const SnapSchema = Schema({
-    fecha: String, 
+    id: String,
+    user_id: String,
+    nombre: String,
+    fecha: String,
     image: String
 });
 

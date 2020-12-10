@@ -6,6 +6,7 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  flex-direction: column
 }
 
 #container strong {
@@ -24,6 +25,13 @@
 
 #container a {
   text-decoration: none;
+}
+
+.oya {
+  display: grid;
+  height: 50%;
+  grid-template-columns: auto auto;
+  grid-template-rows: max-content auto auto;
 }
 /*
 ion-content{
